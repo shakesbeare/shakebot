@@ -1,0 +1,16 @@
+env/
+STEAMAPI
+json/
+__pycache__/
+TOKEN
+*.log
+ffmpeg.exe
+ffplay.exe
+ffprobe.exe
+start
+.env
+copypastas.json
+
+# Added by cargo
+
+/target

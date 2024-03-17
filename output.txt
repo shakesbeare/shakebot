@@ -1,0 +1,477 @@
+{{Tabs Hero}}
+
+{{VoiceNavSidebar}}{{TOC float|right}}
+
+== Loadout ==
+* <sm2>vo_abaddon_abad_spawn_01.mp3</sm2> Abaddon.
+* <sm2>vo_abaddon_abad_spawn_02.mp3</sm2> Lord of Avernus.
+* <sm2>vo_abaddon_abad_spawn_03.mp3</sm2> This place appears like a vision in the mist.
+* <sm2>vo_abaddon_abad_spawn_05.mp3</sm2> From House Avernus, I set forth.
+* <sm2>vo_abaddon_abad_begin_02.mp3</sm2> The [[fog of war]] is no match for the mist of fate.
+* <sm2>vo_abaddon_abad_move_05.mp3</sm2> Chosen of Avernus.
+* <sm2>vo_abaddon_abad_attack_08.mp3</sm2> By the House Avernus.
+* <sm2>vo_abaddon_abad_cast_02.mp3</sm2> You have called death upon yourself.
+* <sm2>vo_abaddon_abad_levelup_01.mp3</sm2> For the House Avernus!
+* <sm2>vo_abaddon_abad_levelup_06.mp3</sm2> Look upon the Lord of Avernus and beware.
+* <sm2>vo_abaddon_abad_purch_01.mp3</sm2> For the House Avernus!
+
+== Drafting ==
+''Picked''
+* <sm2>vo_abaddon_abad_spawn_01.mp3</sm2> Abaddon.
+
+''Banned''
+* <sm2>vo_abaddon_abad_anger_07.mp3</sm2> Mmm.
+
+== Entering battle ==
+* <sm2>vo_abaddon_abad_spawn_01.mp3</sm2> Abaddon.
+* <sm2>vo_abaddon_abad_spawn_02.mp3</sm2> Lord of Avernus.
+* <sm2>vo_abaddon_abad_spawn_03.mp3</sm2> This place appears like a vision in the mist.
+* <sm2>vo_abaddon_abad_spawn_05.mp3</sm2> From House Avernus, I set forth.
+
+== Taunting ==
+* <sm2>vo_abaddon_abad_inthebag_01.mp3</sm2> I have known from an early age, since the Avernal Font's first and greatest revelation, that this one would be in the bag.
+
+== Beginning battle ==
+* <sm2>vo_abaddon_abad_begin_01.mp3</sm2> The coils of life and death now bind us all.
+* <sm2>vo_abaddon_abad_begin_02.mp3</sm2> The fog of war is no match for the mist of fate.
+
+== Moving ==
+<small>''6 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_move_01.mp3</sm2> Yes.
+* <sm2>vo_abaddon_abad_move_02.mp3</sm2> I ride.
+* <sm2>vo_abaddon_abad_move_03.mp3</sm2> Such power.
+* <sm2>vo_abaddon_abad_move_04.mp3</sm2> I travel with the mist.
+* <sm2>vo_abaddon_abad_move_05.mp3</sm2> Chosen of Avernus.
+* <sm2>vo_abaddon_abad_move_06.mp3</sm2> Indeed.
+* <sm2>vo_abaddon_abad_move_07.mp3</sm2> So it goes.
+* <sm2>vo_abaddon_abad_move_08.mp3</sm2> I see.
+* <sm2>vo_abaddon_abad_move_09.mp3</sm2> The mist moves.
+* <sm2>vo_abaddon_abad_move_10.mp3</sm2> So be it.
+* <sm2>vo_abaddon_abad_move_11.mp3</sm2> Like shapes in mist.
+* <sm2>vo_abaddon_abad_move_12.mp3</sm2> I should say so.
+* <sm2>vo_abaddon_abad_move_13.mp3</sm2> Well studied.
+* <sm2>vo_abaddon_abad_move_14.mp3</sm2> I see the way.
+* <sm2>vo_abaddon_abad_move_15.mp3</sm2> I just might.
+* <sm2>vo_abaddon_abad_move_16.mp3</sm2> I might at that.
+* <sm2>vo_abaddon_abad_move_17.mp3</sm2> More than likely.
+* <sm2>vo_abaddon_abad_move_18.mp3</sm2> As counselled.
+* <sm2>vo_abaddon_abad_move_19.mp3</sm2> Very cunning.
+* <sm2>vo_abaddon_abad_move_20.mp3</sm2> So I have sworn.
+* <sm2>vo_abaddon_abad_move_21.mp3</sm2> Things are rarely as they seem.
+* <sm2>vo_abaddon_abad_move_22.mp3</sm2> Indeed.
+
+== Attacking ==
+<small>''6 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_attack_01.mp3</sm2> To the fray.
+* <sm2>vo_abaddon_abad_attack_02.mp3</sm2> On them.
+* <sm2>vo_abaddon_abad_attack_03.mp3</sm2> Submit.
+* <sm2>vo_abaddon_abad_attack_04.mp3</sm2> Mark me well.
+* <sm2>vo_abaddon_abad_attack_05.mp3</sm2> Follow me.
+* <sm2>vo_abaddon_abad_attack_06.mp3</sm2> Ride onward.
+* <sm2>vo_abaddon_abad_attack_07.mp3</sm2> From the mist.
+* <sm2>vo_abaddon_abad_attack_08.mp3</sm2> By the House Avernus.
+* <sm2>vo_abaddon_abad_attack_09.mp3</sm2> Who goes there?
+* <sm2>vo_abaddon_abad_attack_10.mp3</sm2> To the foe!
+* <sm2>vo_abaddon_abad_attack_11.mp3</sm2> Run them down.
+* <sm2>vo_abaddon_abad_attack_12.mp3</sm2> Fly, my steed.
+* <sm2>vo_abaddon_abad_attack_13.mp3</sm2> Submit!
+
+== Ordering a spell cast ==
+<small>''Only when distance is at least 2x the cast range, 4 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_cast_01.mp3</sm2> By what right do you tread here?
+* <sm2>vo_abaddon_abad_cast_02.mp3</sm2> You have called death upon yourself.
+* <sm2>vo_abaddon_abad_cast_03.mp3</sm2> The eyes of mist have seen you.
+
+== Abilities ==
+'''{{A|Mist Coil|Abaddon}}'''
+* <sm2>vo_abaddon_abad_deathcoil_01.mp3</sm2> {{resp|u}} Deathcoil.
+* <sm2>vo_abaddon_abad_deathcoil_02.mp3</sm2> {{resp|u}} Death for you, life for me.
+* <sm2>vo_abaddon_abad_deathcoil_06.mp3</sm2> {{resp|u}} Coil of healing.
+
+''Killing enemy''<br />
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_deathcoil_03.mp3</sm2> The coil of death ensnares.
+* <sm2>vo_abaddon_abad_deathcoil_04.mp3</sm2> Coil and recoil.
+* <sm2>vo_abaddon_abad_deathcoil_05.mp3</sm2> Coil keep you.
+* <sm2>vo_abaddon_abad_deathcoil_07.mp3</sm2> Coil of life.
+
+'''{{A|Aphotic Shield|Abaddon}}'''<br />
+''On cast''<br />
+<small>''50% chance''</small>
+* <sm2>vo_abaddon_abad_aphoticshield_01.mp3</sm2> {{resp|u}} Take shelter.
+* <sm2>vo_abaddon_abad_aphoticshield_02.mp3</sm2> A shield of power.
+* <sm2>vo_abaddon_abad_aphoticshield_03.mp3</sm2> A shield impenetrable.
+* <sm2>vo_abaddon_abad_aphoticshield_04.mp3</sm2> Wrapped in the mist.
+* <sm2>vo_abaddon_abad_aphoticshield_05.mp3</sm2> Blessed of Avernus.
+* <sm2>vo_abaddon_abad_aphoticshield_06.mp3</sm2> Aphotic Shield.
+* <sm2>vo_abaddon_abad_aphoticshield_07.mp3</sm2> Shielded.
+
+'''{{A|Curse of Avernus|Abaddon}}'''
+* <sm2>vo_abaddon_abad_frostmourne_01.mp3</sm2> {{resp|u}} The mistblade bites.
+* <sm2>vo_abaddon_abad_frostmourne_02.mp3</sm2> {{resp|u}} Foe to all.
+* <sm2>vo_abaddon_abad_frostmourne_03.mp3</sm2> {{resp|u}} Join in.
+* <sm2>vo_abaddon_abad_frostmourne_04.mp3</sm2> {{resp|u}} Here, friends.
+* <sm2>vo_abaddon_abad_frostmourne_05.mp3</sm2> {{resp|u}} Take this dog down.
+* <sm2>vo_abaddon_abad_frostmourne_06.mp3</sm2> {{resp|u}} None shall mourn you.
+* <sm2>vo_abaddon_abad_frostmourne_07.mp3</sm2> {{resp|u}} Down with you.
+
+'''{{A|Borrowed Time|Abaddon}}'''<br />
+''On cast''<br />
+<small>''50% chance''</small>
+* <sm2>vo_abaddon_abad_borrowedtime_02.mp3</sm2> Come, I dare you.
+* <sm2>vo_abaddon_abad_borrowedtime_03.mp3</sm2> Go ahead.
+* <sm2>vo_abaddon_abad_borrowedtime_04.mp3</sm2> Throw in against me.
+* <sm2>vo_abaddon_abad_borrowedtime_05.mp3</sm2> I'll take your worst.
+* <sm2>vo_abaddon_abad_borrowedtime_06.mp3</sm2> Just try it.
+* <sm2>vo_abaddon_abad_borrowedtime_07.mp3</sm2> Your weapons betray you.
+* <sm2>vo_abaddon_abad_borrowedtime_08.mp3</sm2> That harms me not.
+* <sm2>vo_abaddon_abad_borrowedtime_09.mp3</sm2> Do that again.
+* <sm2>vo_abaddon_abad_borrowedtime_10.mp3</sm2> What harms you, heals me.
+* <sm2>vo_abaddon_abad_borrowedtime_11.mp3</sm2> Throw in against me.
+
+<small>''1% chance''</small>
+* <sm2>vo_abaddon_abad_borrowedtime_01.mp3</sm2> Come at me.
+
+== Leveling up ==
+* <sm2>vo_abaddon_abad_levelup_01.mp3</sm2> For the House Avernus!
+* <sm2>vo_abaddon_abad_levelup_02.mp3</sm2> The spectral mist fills my soul to overflowing.
+* <sm2>vo_abaddon_abad_levelup_03.mp3</sm2> I can scarce contain such power.
+* <sm2>vo_abaddon_abad_levelup_04.mp3</sm2> All this was promised me, and more.
+* <sm2>vo_abaddon_abad_levelup_05.mp3</sm2> The murk of Avernus floods my veins.
+* <sm2>vo_abaddon_abad_levelup_06.mp3</sm2> Look upon the Lord of Avernus and beware.
+* <sm2>vo_abaddon_abad_levelup_07.mp3</sm2> Deep I drink from the font of fate.
+* <sm2>vo_abaddon_abad_levelup_08.mp3</sm2> New power stirs within.
+* <sm2>vo_abaddon_abad_levelup_09.mp3</sm2> A dark thirst slaked.
+* <sm2>vo_abaddon_abad_levelup_10.mp3</sm2> The mist chose me, it is not mine to command.
+* <sm2>vo_abaddon_abad_levelup_11.mp3</sm2> Ha ha ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_levelup_12.mp3</sm2> Hm hm hm hm hm hm hm hm.
+
+== Killing an enemy ==
+* <sm2>vo_abaddon_abad_kill_01.mp3</sm2> Such ignoble blood taints the soil where it spills.
+* <sm2>vo_abaddon_abad_kill_02.mp3</sm2> An offering unworthy of the House Avernus.
+* <sm2>vo_abaddon_abad_kill_03.mp3</sm2> Your fate was foreshadowed in the mist.
+* <sm2>vo_abaddon_abad_kill_04.mp3</sm2> The murk of oblivion reclaims you.
+* <sm2>vo_abaddon_abad_kill_05.mp3</sm2> In the mists of time you are but a blur.
+* <sm2>vo_abaddon_abad_kill_06.mp3</sm2> To die at a noble hand is no guarantee of a noble death.
+* <sm2>vo_abaddon_abad_kill_07.mp3</sm2> Drink deep of the mist as it turns to black.
+* <sm2>vo_abaddon_abad_kill_08.mp3</sm2> The mist is your master.
+* <sm2>vo_abaddon_abad_kill_09.mp3</sm2> I will see you in the shadow of Avernus.
+* <sm2>vo_abaddon_abad_kill_10.mp3</sm2> Drowned in the Font of Avernus.
+* <sm2>vo_abaddon_abad_kill_11.mp3</sm2> Ha ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_kill_12.mp3</sm2> Hm hm hm hm hm hm hm hm hm hm.
+* <sm2>vo_abaddon_abad_kill_13.mp3</sm2> Ha ha ah ah aha haha ha ah ha ha.
+* <sm2>vo_abaddon_abad_kill_14.mp3</sm2> Ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_kill_15.mp3</sm2> Mm hm hm hm hm hm hm hm hm hm.
+* <sm2>vo_abaddon_abad_kill_16.mp3</sm2> Ha ha ha ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_01.mp3</sm2> Ha hah aha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_02.mp3</sm2> Hm hm hm hm hm.
+* <sm2>vo_abaddon_abad_laugh_03.mp3</sm2> Ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_04.mp3</sm2> Ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_05.mp3</sm2> He he he he he he he he.
+
+'''Killing a specific enemy'''<br />
+<small>''35% chance''</small>
+* <sm2>vo_abaddon_abad_rival_01.mp3</sm2> {{hero icon|Skywrath Mage|16px}} You gave up too much for your honor, Dragonus.
+* <sm2>vo_abaddon_abad_rival_02.mp3</sm2> {{hero icon|Elder Titan|16px}} Back into the mist of ages, Elder Titan.
+* <sm2>vo_abaddon_abad_rival_03.mp3</sm2> {{hero icon|Underlord|16px}} I put you under, lord.
+* <sm2>vo_abaddon_abad_rival_04.mp3</sm2> {{hero icon|Legion Commander|16px}} You cannot best what you can barely see.
+* <sm2>vo_abaddon_abad_rival_05.mp3</sm2> {{hero icon|Phoenix|16px}} That Phoenix flew too close to the mist.
+* <sm2>vo_abaddon_abad_rival_06.mp3</sm2> {{hero icon|Winter Wyvern|16px}} Winter comes to an early end.
+* <sm2>vo_abaddon_abad_rival_07.mp3</sm2> {{hero icon|Ember Spirit|16px}} We've stamped your spark out, Ember Spirit.
+* <sm2>vo_abaddon_abad_rival_08.mp3</sm2> {{hero icon|Nyx Assassin|16px}} Another emissary of Nyx, crushed.
+* <sm2>vo_abaddon_abad_rival_09.mp3</sm2> {{hero icon|Silencer|16px}} What's that, Silencer? I couldn't hear you.
+* <sm2>vo_abaddon_abad_rival_10.mp3</sm2> {{hero icon|Death Prophet|16px}} Death lied to you about your fate, Prophet.
+* <sm2>vo_abaddon_abad_rival_11.mp3</sm2> {{hero icon|Lion|16px}} You'll never lay a finger on me again, Lion.
+* <sm2>vo_abaddon_abad_rival_12.mp3</sm2> {{hero icon|Bane|16px}} An evil mist enshrouds the elemental.
+* <sm2>vo_abaddon_abad_rival_13.mp3</sm2> {{hero icon|Shadow Shaman|16px}} Did you not see me in the shadows, Shaman?
+* <sm2>vo_abaddon_abad_rival_14.mp3</sm2> {{hero icon|Axe|16px}} I swept away your Red Mist Army, Axe.
+* <sm2>vo_abaddon_abad_rival_15.mp3</sm2> {{hero icon|Necrophos|16px}} Back you go, into the miasmal fog.
+* <sm2>vo_abaddon_abad_rival_16.mp3</sm2> {{hero icon|Bloodseeker|16px}} You should have sought me in the mist, Bloodseeker.
+
+'''First Blood'''
+* <sm2>vo_abaddon_abad_firstblood_01.mp3</sm2> First Blood! An offering worthy of the House Avernus.
+
+== Meeting an ally ==
+<small>''During earlygame, within 1000 radius''</small>
+* <sm2>vo_abaddon_abad_ally_01.mp3</sm2> {{hero icon|Techies|16px}} {{resp|r}} Tell me where to walk and not to walk, Techies.
+* <sm2>vo_abaddon_abad_ally_02.mp3</sm2> {{hero icon|Terrorblade|16px}} {{resp|r}} Come, friend, let us fill their souls with terror.
+* <sm2>vo_abaddon_abad_ally_03.mp3</sm2> {{hero icon|Arc Warden|16px}} {{resp|r}} Waste not your energy, Zet, but wield it well.
+* <sm2>vo_abaddon_abad_ally_04.mp3</sm2> {{hero icon|Dazzle|16px}} {{resp|r}} Dazzle, no foe would be pleased to see us two together.
+* <sm2>vo_abaddon_abad_ally_05.mp3</sm2> {{hero icon|Dazzle|16px}} {{resp|r}} The powers of ill reprieve are joined in us, Dazzle.
+* <sm2>vo_abaddon_abad_ally_06.mp3</sm2> {{hero icon|Bounty Hunter|16px}} {{resp|r}} The coffers of Avernus will open if the hunt goes well today.
+* <sm2>vo_abaddon_abad_ally_07.mp3</sm2> {{hero icon|Weaver|16px}} {{resp|r}} Weave for us a victory in battle.
+* <sm2>vo_abaddon_abad_ally_08.mp3</sm2> {{hero icon|Phantom Assassin|16px}} {{resp|r}} Your phantom presence is always welcome.
+* <sm2>vo_abaddon_abad_ally_09.mp3</sm2> {{hero icon|Axe|16px}} {{resp|r}} Axe, a fellow fighter of the mist.
+* <sm2>vo_abaddon_abad_ally_10.mp3</sm2> {{hero icon|tiny|16px}} {{resp|r}} I see you've thrown in with us, Tiny.
+* <sm2>vo_abaddon_abad_ally_11.mp3</sm2> {{hero icon|Sven|16px}} {{resp|r}} Honors to you and to the rogue's code you follow.
+* <sm2>vo_abaddon_abad_ally_12.mp3</sm2> {{hero icon|Morphling|16px}} {{resp|r}} There is no better ally than one who shifts like the tides of war.
+
+== Last hitting ==
+<small>''60 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_lasthit_01.mp3</sm2> A trifle.
+* <sm2>vo_abaddon_abad_lasthit_02.mp3</sm2> Souls into gold.
+* <sm2>vo_abaddon_abad_lasthit_03.mp3</sm2> A fair conversion.
+* <sm2>vo_abaddon_abad_lasthit_04.mp3</sm2> Nice rate of exchange.
+* <sm2>vo_abaddon_abad_lasthit_05.mp3</sm2> For the House Avernus.
+* <sm2>vo_abaddon_abad_lasthit_06.mp3</sm2> Bow to your lord.
+* <sm2>vo_abaddon_abad_lasthit_07.mp3</sm2> A tribute to my house.
+* <sm2>vo_abaddon_abad_lasthit_08.mp3</sm2> Pennies for the font.
+* <sm2>vo_abaddon_abad_lasthit_09.mp3</sm2> Death for life.
+* <sm2>vo_abaddon_abad_lasthit_10.mp3</sm2> It ends.
+
+== Denying ==
+<small>''Requires visible enemy player within 1000 radius, 60 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_deny_01.mp3</sm2> Denied.
+* <sm2>vo_abaddon_abad_deny_02.mp3</sm2> Denied.
+* <sm2>vo_abaddon_abad_deny_03.mp3</sm2> Oh no.
+* <sm2>vo_abaddon_abad_deny_04.mp3</sm2> You dare not.
+* <sm2>vo_abaddon_abad_deny_05.mp3</sm2> Not so.
+* <sm2>vo_abaddon_abad_deny_06.mp3</sm2> Never.
+* <sm2>vo_abaddon_abad_deny_07.mp3</sm2> Twas never thus.
+* <sm2>vo_abaddon_abad_deny_08.mp3</sm2> Nay.
+* <sm2>vo_abaddon_abad_deny_09.mp3</sm2> I say not.
+* <sm2>vo_abaddon_abad_deny_10.mp3</sm2> You thought I missed.
+* <sm2>vo_abaddon_abad_deny_11.mp3</sm2> Ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_deny_12.mp3</sm2> Ha ha.
+* <sm2>vo_abaddon_abad_deny_13.mp3</sm2> {{resp|u}} Oh no you di'nt.
+* <sm2>vo_abaddon_abad_deny_14.mp3</sm2> Denied.
+* <sm2>vo_abaddon_abad_deny_15.mp3</sm2> Never.
+* <sm2>vo_abaddon_abad_deny_16.mp3</sm2> Ha!
+* <sm2>vo_abaddon_abad_deny_17.mp3</sm2> Ha ha ha.
+* <sm2>vo_abaddon_abad_deny_18.mp3</sm2> Heh!
+* <sm2>vo_abaddon_abad_deny_19.mp3</sm2> Hm hm hm.
+* <sm2>vo_abaddon_abad_deny_20.mp3</sm2> Denied.
+* <sm2>vo_abaddon_abad_deny_21.mp3</sm2> Never!
+* <sm2>vo_abaddon_abad_deny_22.mp3</sm2> Hm hm hm hm.
+
+== Acquiring an item ==
+* <sm2>vo_abaddon_abad_purch_01.mp3</sm2> {{resp|r}} For the House Avernus!
+* <sm2>vo_abaddon_abad_purch_02.mp3</sm2> {{resp|r}} A noble expense for a noble cause.
+* <sm2>vo_abaddon_abad_purch_03.mp3</sm2> {{resp|r}} Any power can be acquired for a price.
+
+'''Acquiring a specific item'''
+* <sm2>vo_abaddon_abad_scepter_01.mp3</sm2> {{Item|Aghanim's Scepter|20px}} {{resp|r}} Ah, scepter.
+* <sm2>vo_abaddon_abad_scepter_02.mp3</sm2> {{Item|Aghanim's Scepter|20px}} {{resp|r}} A noble and lordly scepter.
+* <sm2>vo_abaddon_abad_blink_01.mp3</sm2> {{Item|Blink Dagger|20px}} {{resp|r}} Blink Dagger!
+* <sm2>vo_abaddon_abad_blink_02.mp3</sm2> {{Item|Blink Dagger|20px}} {{resp|r}} Blink and you'll be missed.
+* <sm2>vo_abaddon_abad_items_01.mp3</sm2> {{Item|Pipe of Insight|20px}} {{resp|r}} Pipe of Insight.
+* <sm2>vo_abaddon_abad_items_02.mp3</sm2> {{Item|Mekansm|20px}} {{resp|r}} Mekansm.
+* <sm2>vo_abaddon_abad_items_03.mp3</sm2> {{Item|Shiva's Guard|20px}} {{resp|r}} Shiva's Guard.
+* <sm2>vo_abaddon_abad_items_04.mp3</sm2> {{Item|Radiance|20px}} {{resp|r}} Radiance.
+* <sm2>vo_abaddon_abad_items_05.mp3</sm2> {{Item|Drum of Endurance|20px}} {{resp|r}} Drum of Endurance.
+* <sm2>vo_abaddon_abad_items_06.mp3</sm2> {{Item|Scythe of Vyse|20px}} {{resp|r}} Scythe of Vyse.
+* <sm2>vo_abaddon_abad_items_07.mp3</sm2> {{Item|Assault Cuirass|20px}} {{resp|r}} Assault Cuirass.
+* <sm2>vo_abaddon_abad_items_08.mp3</sm2> {{Item|Heaven's Halberd|20px}} {{resp|r}} Heaven's Halberd.
+* <sm2>vo_abaddon_abad_items_09.mp3</sm2> {{Item|Heart of Tarrasque|20px}} {{resp|r}} Heart of Tarrasque!
+* <sm2>vo_abaddon_abad_items_10.mp3</sm2> {{Item|Arcane Boots|20px}} {{resp|r}} Arcane Boots!
+* <sm2>vo_abaddon_abad_immort_01.mp3</sm2> {{Item|Aegis of the Immortal|20px}} Immortality!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_immort_02.mp3</sm2> {{Item|Aegis of the Immortal|20px}} Death dispelled like a vapor.
+
+== Dying ==
+* <sm2>vo_abaddon_abad_death_01.mp3</sm2> No!
+* <sm2>vo_abaddon_abad_death_02.mp3</sm2> May the haunted mist take me.
+* <sm2>vo_abaddon_abad_death_03.mp3</sm2> How can such a thing be?
+* <sm2>vo_abaddon_abad_death_04.mp3</sm2> I thought you missed.
+* <sm2>vo_abaddon_abad_death_05.mp3</sm2> Black mist, black curtains.
+* <sm2>vo_abaddon_abad_death_06.mp3</sm2> A murk so dark.
+* <sm2>vo_abaddon_abad_death_07.mp3</sm2> And I left no heir!
+* <sm2>vo_abaddon_abad_death_08.mp3</sm2> Avernus, forgive me.
+* <sm2>vo_abaddon_abad_death_09.mp3</sm2> Unworthy of the Font.
+* <sm2>vo_abaddon_abad_death_10.mp3</sm2> Call me lord no more.
+* <sm2>vo_abaddon_abad_death_11.mp3</sm2> Flee, my steed.
+* <sm2>vo_abaddon_abad_death_12.mp3</sm2> I have been overmastered.
+* <sm2>vo_abaddon_abad_death_13.mp3</sm2> Bury me in my ancestral home.
+* <sm2>vo_abaddon_abad_death_14.mp3</sm2> No.
+* <sm2>vo_abaddon_abad_death_15.mp3</sm2> No.
+
+'''Dying to a specific hero'''
+* <sm2>vo_abaddon_abad_deathcoil_08.mp3</sm2> {{Hero icon|Abaddon|16px}} [[File:Mist Coil icon.png|16px|link=Mist Coil]] By my right.
+* <sm2>vo_abaddon_abad_deathcoil_09.mp3</sm2> {{Hero icon|Abaddon|16px}} [[File:Mist Coil icon.png|16px|link=Mist Coil]] My life is mine to spend.
+* <sm2>vo_abaddon_abad_deathcoil_10.mp3</sm2> {{Hero icon|Abaddon|16px}} [[File:Mist Coil icon.png|16px|link=Mist Coil]] Reclaimed for Avernus.
+
+== Respawning ==
+* <sm2>vo_abaddon_abad_respawn_01.mp3</sm2> Baptized in the font Avernus, death means something different to me.
+* <sm2>vo_abaddon_abad_respawn_02.mp3</sm2> The mist parts and I am born anew.
+* <sm2>vo_abaddon_abad_respawn_03.mp3</sm2> The Lord of Avernus is reborn.
+* <sm2>vo_abaddon_abad_respawn_04.mp3</sm2> From the murk I emerge.
+* <sm2>vo_abaddon_abad_respawn_05.mp3</sm2> We ride out refreshed.
+* <sm2>vo_abaddon_abad_respawn_06.mp3</sm2> The mist conceals and then reveals.
+* <sm2>vo_abaddon_abad_respawn_07.mp3</sm2> I drank deep from the font and am renewed.
+* <sm2>vo_abaddon_abad_respawn_08.mp3</sm2> A noble rebirth.
+* <sm2>vo_abaddon_abad_respawn_09.mp3</sm2> I have enriched my understanding of death.
+* <sm2>vo_abaddon_abad_respawn_10.mp3</sm2> Life and death have lost a little of their mystery.
+
+'''Reincarnating'''
+* <sm2>vo_abaddon_abad_fastres_01.mp3</sm2> Death and I, we have an understanding.
+
+== Bottling Runes ==
+* <sm2>vo_abaddon_abad_bottle_01.mp3</sm2> Await the day.
+* <sm2>vo_abaddon_abad_bottle_02.mp3</sm2> Time will tell.
+* <sm2>vo_abaddon_abad_bottle_03.mp3</sm2> A power concealed.
+
+== Activating runes ==
+''{{Rune|Arcane}}''
+* <sm2>vo_abaddon_abad_item_rare_01.mp3</sm2> {{resp|300}} I claim this prize for the House Avernus.
+
+''{{Rune|Bounty}}''
+* <sm2>vo_abaddon_abad_lasthit_07.mp3</sm2> {{resp|300}} A tribute to my house.
+
+''{{Rune|Double Damage}}''
+* <sm2>vo_abaddon_abad_doubdam_01.mp3</sm2> Double damage!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_doubdam_02.mp3</sm2> Two deaths bearing down.
+
+''{{Rune|Haste}}''
+* <sm2>vo_abaddon_abad_haste_01.mp3</sm2> Haste!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_haste_02.mp3</sm2> Let us run on to our fate.
+
+''{{Rune|Illusion}}''
+* <sm2>vo_abaddon_abad_illus_01.mp3</sm2> Illusion!
+
+''{{Rune|Invisibility}}''
+* <sm2>vo_abaddon_abad_invis_01.mp3</sm2> Invisibility!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_invis_02.mp3</sm2> The haunted mist conceals us.
+
+''{{Rune|Regeneration}}''
+* <sm2>vo_abaddon_abad_regen_01.mp3</sm2> Regeneration!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_regen_02.mp3</sm2> The font forever renewing.
+
+== Ability on cooldown ==
+<small>''First attempt within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_notyet_01.mp3</sm2> Not yet.
+* <sm2>vo_abaddon_abad_notyet_04.mp3</sm2> I'm not ready.
+* <sm2>vo_abaddon_abad_notyet_07.mp3</sm2> It's not time yet!
+
+<small>''Second attempt within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_notyet_02.mp3</sm2> Not yet.
+* <sm2>vo_abaddon_abad_notyet_05.mp3</sm2> I'm not ready.
+* <sm2>vo_abaddon_abad_notyet_08.mp3</sm2> It's not time yet!
+
+<small>''Third and more attempts within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_notyet_03.mp3</sm2> Not yet.
+* <sm2>vo_abaddon_abad_notyet_06.mp3</sm2> I'm not ready.
+* <sm2>vo_abaddon_abad_notyet_09.mp3</sm2> It's not time yet!
+
+== Not enough mana ==
+<small>''First attempt within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_nomana_01.mp3</sm2> Out of mana!
+* <sm2>vo_abaddon_abad_nomana_04.mp3</sm2> No mana!
+* <sm2>vo_abaddon_abad_nomana_07.mp3</sm2> Not enough mana!
+
+<small>''Second attempt within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_nomana_02.mp3</sm2> Out of mana!
+* <sm2>vo_abaddon_abad_nomana_05.mp3</sm2> No mana!
+* <sm2>vo_abaddon_abad_nomana_08.mp3</sm2> Not enough mana!
+
+<small>''Third and more attempts within 10 seconds''</small>
+* <sm2>vo_abaddon_abad_nomana_03.mp3</sm2> Out of mana!
+* <sm2>vo_abaddon_abad_nomana_06.mp3</sm2> No mana!
+* <sm2>vo_abaddon_abad_nomana_09.mp3</sm2> Not enough mana!
+
+== Taking damage ==
+<small>''3 seconds cooldown ''</small>
+* <sm2>vo_abaddon_abad_pain_01.mp3</sm2> Ooh!
+* <sm2>vo_abaddon_abad_pain_02.mp3</sm2> Ah!
+* <sm2>vo_abaddon_abad_pain_03.mp3</sm2> Oh!
+* <sm2>vo_abaddon_abad_pain_04.mp3</sm2> Eeyeh!
+* <sm2>vo_abaddon_abad_pain_05.mp3</sm2> Oh!
+* <sm2>vo_abaddon_abad_pain_06.mp3</sm2> Uh!
+* <sm2>vo_abaddon_abad_pain_07.mp3</sm2> Ah!
+* <sm2>vo_abaddon_abad_pain_08.mp3</sm2> Ah!
+* <sm2>vo_abaddon_abad_pain_09.mp3</sm2> Ah!
+* <sm2>vo_abaddon_abad_pain_10.mp3</sm2> Uh!
+
+<small>''25% chance''</small>
+* <sm2>vo_abaddon_abad_underattack_01.mp3</sm2> {{resp|120}} I'm under attack!
+
+== Selecting ==
+<small>''5 consecutive clicks on the hero''</small>
+* <sm2>vo_abaddon_abad_illus_02.mp3</sm2> Do you trust what you see in the mist?
+* <sm2>vo_abaddon_abad_spawn_04.mp3</sm2> I ride as the haunted mist wills.
+
+== Chat responses ==
+'''Lane missing'''
+* <sm2>vo_abaddon_abad_lanemissing_01.mp3</sm2> Missing top.
+* <sm2>vo_abaddon_abad_lanemissing_02.mp3</sm2> Missing middle.
+* <sm2>vo_abaddon_abad_lanemissing_03.mp3</sm2> Missing bottom.
+
+'''Thanking'''<br />
+<small>''thx, thanks, ty, or ally casts certain spell on player, 30 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_thanks_01.mp3</sm2> With gratitude.
+* <sm2>vo_abaddon_abad_thanks_02.mp3</sm2> You have my thanks.
+
+'''Laughing'''<br />
+<small>''/laugh, haha, lol, 15 seconds cooldown''</small>
+* <sm2>vo_abaddon_abad_laugh_01.mp3</sm2> Ha hah aha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_02.mp3</sm2> Hm hm hm hm hm.
+* <sm2>vo_abaddon_abad_laugh_03.mp3</sm2> Ha ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_04.mp3</sm2> Ha ha ha ha ha ha ha ha.
+* <sm2>vo_abaddon_abad_laugh_05.mp3</sm2> He he he he he he he he.
+
+== Match end ==
+''Won''
+* <sm2>vo_abaddon_abad_win_01.mp3</sm2> Yes.
+* <sm2>vo_abaddon_abad_win_02.mp3</sm2> Victory.
+* <sm2>vo_abaddon_abad_win_03.mp3</sm2> Just as the haunted mist foretold.
+* <sm2>vo_abaddon_abad_win_04.mp3</sm2> Yes.
+
+''Lost''
+* <sm2>vo_abaddon_abad_lose_01.mp3</sm2> No!
+* <sm2>vo_abaddon_abad_lose_02.mp3</sm2> Defeated.
+* <sm2>vo_abaddon_abad_lose_03.mp3</sm2> My great House Avernus has fallen to ruin.
+
+== Cosmetic item drop ==
+''Common''
+* <sm2>vo_abaddon_abad_item_common_01.mp3</sm2> I am hardly deserving of such fortune.
+
+''Uncommon''
+* <sm2>vo_abaddon_abad_item_moderate_01.mp3</sm2> Here is a turn of fortune the Font did not disclose.
+
+''Rare and higher''
+* <sm2>vo_abaddon_abad_item_rare_01.mp3</sm2> I claim this prize for the House Avernus.
+
+== Misc ==
+'''Failure'''
+* <sm2>vo_abaddon_abad_failure_01.mp3</sm2> {{resp|u}} The House Avernus will disown me for that.
+* <sm2>vo_abaddon_abad_failure_02.mp3</sm2> {{resp|u}} Have I fallen from the grace of the Avernal mist?
+
+'''Wizard'''
+* <sm2>vo_abaddon_abad_crumwiz_01.mp3</sm2> {{resp|u}} Crummy wizard!
+* <sm2>vo_abaddon_abad_shiwiz_01.mp3</sm2> {{resp|u}} [[Shitty wizard]]!
+
+'''Anger'''
+* <sm2>vo_abaddon_abad_anger_01.mp3</sm2> {{resp|u}} Gruuh gruh.
+* <sm2>vo_abaddon_abad_anger_02.mp3</sm2> {{resp|u}} Grrrrrr.
+* <sm2>vo_abaddon_abad_anger_03.mp3</sm2> {{resp|u}} Urrr.
+* <sm2>vo_abaddon_abad_anger_04.mp3</sm2> {{resp|u}} Ugh uh.
+* <sm2>vo_abaddon_abad_anger_05.mp3</sm2> {{resp|u}} Hrrrrmph.
+* <sm2>vo_abaddon_abad_anger_06.mp3</sm2> {{resp|u}} Hm.
+
+'''Grunt'''
+* <sm2>vo_abaddon_abad_grunt_01.mp3</sm2> {{resp|u}} Uh.
+* <sm2>vo_abaddon_abad_grunt_02.mp3</sm2> {{resp|u}} Gr uh.
+* <sm2>vo_abaddon_abad_grunt_03.mp3</sm2> {{resp|u}} Uh.
+* <sm2>vo_abaddon_abad_grunt_04.mp3</sm2> {{resp|u}} Uh.
+
+'''Happy'''
+* <sm2>vo_abaddon_abad_happy_01.mp3</sm2> {{resp|u}} Huh.
+* <sm2>vo_abaddon_abad_happy_02.mp3</sm2> {{resp|u}} Mmmm.
+* <sm2>vo_abaddon_abad_happy_03.mp3</sm2> {{resp|u}} Ahh.
+* <sm2>vo_abaddon_abad_happy_04.mp3</sm2> {{resp|u}} Oooh.
+
+{{TJ Ramini}}
+
+[[Category:Responses]]
+
+[[pt:Abaddon/Respostas]]
+[[ru:Abaddon/Реплики]]
+[[zh:亚巴顿/台词]]
