@@ -18,9 +18,9 @@ want to have on hand. They are stored in a json file in the project root called
 
 ```json
 {
-  "copypasta_name": {
-    "content": "This will be sent to the server!",
-    "guild": "My_Server",
+  "badhabits": {
+    "content": "do u guys have bad habits? i walk to gas station every day and buyed one diet pepis or one diet rebdull. this beverage does not make it the way back ... it become consume.",
+    "guild": "the cave",
   }
 }
 ```
