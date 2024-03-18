@@ -13,6 +13,8 @@ use serenity::{
 };
 
 use crate::bot::commands::*;
+use commands::dota::*;
+
 use crate::dota::response::Response;
 use crate::BOT_NAMES;
 use crate::{process_text, DATA};
@@ -32,7 +34,7 @@ impl Bot {
         let intents = GatewayIntents::GUILD_MESSAGES | GatewayIntents::MESSAGE_CONTENT;
 
         let poise_options = poise::FrameworkOptions {
-            commands: vec![copypasta(), help(), disable(), enable()],
+            commands: vec![copypasta(), help(), disable(), enable(), dota()],
             ..Default::default()
         };
 

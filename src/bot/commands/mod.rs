@@ -1,3 +1,5 @@
+pub mod dota;
+
 use std::collections::HashMap;
 
 use anyhow::Error;
@@ -56,28 +58,6 @@ pub async fn copypasta(
     Ok(())
 }
 
-/// Don't allow the bot to send dota responses to your messages
-#[poise::command(slash_command)]
-pub async fn disable(ctx: Context<'_>) -> Result<(), Error> {
-    {
-        let mut data = crate::DATA.get().unwrap().lock().unwrap();
-        data.disabled_users.push(ctx.author().id.to_string());
-    }
-    ctx.say("You have disabled dota responses").await?;
-    Ok(())
-}
-
-/// Allow the bot to send dota responses to your messages
-#[poise::command(slash_command)]
-pub async fn enable(ctx: Context<'_>) -> Result<(), Error> {
-    {
-        let mut data = crate::DATA.get().unwrap().lock().unwrap();
-        data.disabled_users
-            .retain(|id| id != &ctx.author().id.to_string());
-    }
-    ctx.say("You have enabled dota responses").await?;
-    Ok(())
-}
 
 /// Show help message
 #[poise::command(slash_command, track_edits, category = "Utility")]

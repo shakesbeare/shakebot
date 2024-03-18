@@ -59,7 +59,7 @@ controlled to keep the repository clean and friendly.
 
 # Commands
 
-Shakebot exposes four commands to users:
+Shakebot exposes the following commands to users:
 - `/copypasta <copypasta_name>`
   - Send the contents of the copypasta to the chat
 - `/enable`
@@ -68,6 +68,8 @@ Shakebot exposes four commands to users:
   - Re-enable dota responses, for cool people
 - `/help` / `/help <command>`
   - Learn about the commands
+- `/dota <phrase>`
+    - Fuzzy find a Dota response
 
 # Why not a database?
 
