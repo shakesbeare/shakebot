@@ -1,3 +1,29 @@
+# For Your Use
+
+While this bot is primarily intended for use in my own servers, you can
+certainly use it in yours. Fair warning, this bot requires permission to
+read chat messages, so it may not be suitable to have it join >100 servers.
+That all said, if you self host the bot, you almost certainly run into this
+issue.
+
+## Setup
+
+In the future, there might be a more robust release mechanism, but at the moment
+the best way to get this bot is by simply cloning the repository and hosting it
+yourself.
+
+- Create a [Discord App](https://discord.com/developers/docs/getting-started)
+  - Make sure to copy the token for later
+  - Discord Developers -> Applications -> Your App -> Bot
+- Clone the git repository to the folder of your choice
+- Create a file named `.env` in the project root
+  - Add the following line: `DISCORD_TOKEN=<your token here>`
+- Start the bot with `cargo run --release`
+
+## Requirements
+
+- [Rust](https://rustup.rs)
+
 # Dota Responses
 
 The primary feature of this bot is the Dota 2 Hero Response mechanism based on 
