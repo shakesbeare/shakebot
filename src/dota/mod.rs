@@ -14,7 +14,7 @@ pub mod serde_response;
 pub struct Dota {
     pub version: String,
     pub patch_notes: HashMap<String, Version>,
-    pub responses: ResponseDatabase,
+    pub response_database: ResponseDatabase,
 }
 
 impl Dota {
@@ -26,9 +26,9 @@ impl Dota {
             self.patch_notes = patch_notes.versions;
             self.version = latest_version;
 
-            self.responses.responses.clear();
-            self.responses.heroes.clear();
-            self.responses.populate_responses().await;
+            self.response_database.responses.clear();
+            self.response_database.heroes.clear();
+            self.response_database.populate_responses().await;
         }
     }
 

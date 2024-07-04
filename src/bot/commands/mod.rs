@@ -6,7 +6,7 @@ use anyhow::Error;
 use poise::samples::HelpConfiguration;
 
 use super::Data;
-type Context<'a> = poise::Context<'a, Data, Error>;
+pub type Context<'a> = poise::Context<'a, Data, Error>;
 
 #[derive(Debug, Clone, serde::Deserialize)]
 struct Copypastas(HashMap<String, Copypasta>);

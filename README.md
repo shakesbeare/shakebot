@@ -62,9 +62,9 @@ controlled to keep the repository clean and friendly.
 Shakebot exposes the following commands to users:
 - `/copypasta <copypasta_name>`
   - Send the contents of the copypasta to the chat
-- `/enable`
-  - Tell Shakebot not to send you dota responses anymore
 - `/disable`
+  - Tell Shakebot not to send you dota responses anymore
+- `/enable`
   - Re-enable dota responses, for cool people
 - `/help` / `/help <command>`
   - Learn about the commands
@@ -82,6 +82,12 @@ felt it would be quite convenient to simply be able to run a git command to upda
 entire bot memory, if needed. This method also minimizes the number of times you'd need
 to run all the api calls to MediaWiki, as having a separate database server seemed like
 overkill for this project and hurt the portability greatly. 
+
+# Planned Features
+
+- Play dota voicelines into a voice channel
+- Custom responses
+- Implement guild-specific responses
 
 # Acknowledgements
 

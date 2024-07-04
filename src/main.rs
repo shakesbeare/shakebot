@@ -23,7 +23,7 @@ async fn main() -> Result<()> {
             defaults
         }
     };
-    tracing::debug!("{} total responses", data.dota.responses.responses.len());
+    tracing::debug!("{} total responses", data.dota.response_database.responses.len());
     let _ = DATA.set(Mutex::new(data));
 
     ctrlc::set_handler(move || match clean_up() {

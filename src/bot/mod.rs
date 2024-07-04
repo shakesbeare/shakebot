@@ -1,23 +1,27 @@
 mod commands;
 mod dota;
 
+use std::sync::{Mutex, OnceLock};
+
 use poise::serenity_prelude as serenity;
 
-use ::serenity::builder::{CreateThread, EditThread};
 use serenity::{
     all::{GatewayIntents, Message},
     async_trait,
-    builder::{CreateAttachment, CreateMessage},
+    builder::CreateMessage,
     client::{Context, EventHandler},
     Client,
 };
 
-use crate::bot::commands::*;
+use crate::bot::{commands::*, dota::dota_response_thread};
 use commands::dota::*;
 
 use crate::dota::response::Response;
 use crate::BOT_NAMES;
 use crate::{process_text, DATA};
+
+static DOTA_COOLDOWN: OnceLock<Mutex<i32>> = OnceLock::new();
+const MIN_MESSAGES: i32 = 5;
 
 pub struct Bot {}
 struct Data {}
@@ -28,6 +32,7 @@ impl Bot {
     }
 
     pub async fn start(&mut self) {
+        let _ = DOTA_COOLDOWN.set(Mutex::new(0));
         dotenv::dotenv().ok();
         let token = std::env::var("DISCORD_TOKEN")
             .expect("Expected a token in the environment");
@@ -80,6 +85,21 @@ impl EventHandler for Handler {
             return;
         }
 
+        if msg.content.split(' ').count() < 3 {
+            return;
+        }
+
+        if let Some(mutex) = DOTA_COOLDOWN.get() {
+            let mut guard = mutex.lock().unwrap(); // just panic if poisoned
+            if *guard > 0 {
+                tracing::info!("Dota response is on cooldown...");
+                *guard -= 1;
+                return;
+            } else {
+                *guard = MIN_MESSAGES;
+            }
+        }
+
         if crate::DATA
             .get()
             .unwrap()
@@ -104,25 +124,7 @@ impl EventHandler for Handler {
             let embed = dota::dota_response_embed(res.hero_id);
             let message = CreateMessage::new().add_embed(embed);
             if let Ok(msg) = msg.channel_id.send_message(&ctx.http, message).await {
-                let attachment = CreateAttachment::bytes(
-                    bytes,
-                    format!("{}.mp3", &res.original_text),
-                );
-                let message = CreateMessage::new().add_file(attachment);
-                let thread_builder = CreateThread::new(res.original_text);
-                let thread = msg.channel_id.create_thread_from_message(
-                    &ctx.http,
-                    msg,
-                    thread_builder,
-                );
-                if let Ok(mut t) = thread.await {
-                    t.say(&ctx.http, &res.response_link).await.unwrap();
-                    t.send_message(&ctx.http, message).await.unwrap();
-                    let edit_thread = EditThread::new().archived(true);
-                    t.edit_thread(&ctx.http, edit_thread).await.unwrap();
-                } else {
-                    tracing::error!("Error creating thread");
-                }
+                dota_response_thread(bytes, &res, &msg, &ctx.http).await;
             } else {
                 tracing::error!("Error sending message");
             }
@@ -137,7 +139,7 @@ impl Handler {
         let data = DATA.get().unwrap().lock().unwrap();
         let processed_text = process_text(text);
         data.dota
-            .responses
+            .response_database
             .get_response(&processed_text, None)
             .cloned()
     }

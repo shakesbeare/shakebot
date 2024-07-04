@@ -21,7 +21,7 @@ impl Default for Data {
         Data {
             dota: Dota {
                 version: "0_00a".to_string(),
-                responses: ResponseDatabase {
+                response_database: ResponseDatabase {
                     responses: vec![],
                     heroes: HashMap::new(),
                     icons: HashMap::new(),
