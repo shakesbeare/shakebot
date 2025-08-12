@@ -16,7 +16,7 @@ use serenity::{
 use crate::bot::{commands::*, dota::dota_response_thread};
 use commands::dota::*;
 
-use crate::dota::response::Response;
+use crate::response::Response;
 use crate::BOT_NAMES;
 use crate::{process_text, DATA};
 
@@ -39,7 +39,7 @@ impl Bot {
         let intents = GatewayIntents::GUILD_MESSAGES | GatewayIntents::MESSAGE_CONTENT;
 
         let poise_options = poise::FrameworkOptions {
-            commands: vec![copypasta(), help(), disable(), enable(), dota()],
+            commands: vec![copypasta(), help(), disable(), enable()],
             ..Default::default()
         };
 
@@ -99,6 +99,7 @@ impl EventHandler for Handler {
                 *guard = MIN_MESSAGES;
             }
         }
+        tracing::info!("Received message: {}", &msg.content);
 
         if crate::DATA
             .get()
@@ -121,7 +122,7 @@ impl EventHandler for Handler {
                 .await
                 .unwrap()
                 .to_vec();
-            let embed = dota::dota_response_embed(res.hero_id);
+            let embed = dota::character_response_embed(res.hero_id);
             let message = CreateMessage::new().add_embed(embed);
             if let Ok(msg) = msg.channel_id.send_message(&ctx.http, message).await {
                 dota_response_thread(bytes, &res, &msg, &ctx.http).await;
@@ -129,7 +130,7 @@ impl EventHandler for Handler {
                 tracing::error!("Error sending message");
             }
         } else {
-            tracing::debug!("No response found for: {}", msg.content);
+            tracing::info!("No response found for: {}", msg.content);
         }
     }
 }
@@ -138,8 +139,7 @@ impl Handler {
     pub fn get_response(&self, text: &str) -> Option<Response> {
         let data = DATA.get().unwrap().lock().unwrap();
         let processed_text = process_text(text);
-        data.dota
-            .response_database
+        data
             .get_response(&processed_text, None)
             .cloned()
     }

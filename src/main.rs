@@ -19,7 +19,9 @@ async fn main() -> Result<()> {
             let mut defaults = Data::default();
             let ron_str = ron::to_string(&defaults)?;
             std::fs::write("data.ron", ron_str)?;
-            defaults.dota.check_for_updates().await;
+            tracing::info!("Checking for updates");
+            // defaults.dota.check_for_updates().await;
+            defaults.smite.check_for_updates().await;
             defaults
         }
     };
