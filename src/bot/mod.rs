@@ -89,17 +89,16 @@ impl EventHandler for Handler {
             return;
         }
 
-        if let Some(mutex) = DOTA_COOLDOWN.get() {
-            let mut guard = mutex.lock().unwrap(); // just panic if poisoned
-            if *guard > 0 {
-                tracing::info!("Dota response is on cooldown...");
-                *guard -= 1;
-                return;
-            } else {
-                *guard = MIN_MESSAGES;
-            }
-        }
-        tracing::info!("Received message: {}", &msg.content);
+        // if let Some(mutex) = DOTA_COOLDOWN.get() {
+        //     let mut guard = mutex.lock().unwrap(); // just panic if poisoned
+        //     if *guard > 0 {
+        //         tracing::info!("Dota response is on cooldown...");
+        //         *guard -= 1;
+        //         return;
+        //     } else {
+        //         *guard = MIN_MESSAGES;
+        //     }
+        // }
 
         if crate::DATA
             .get()

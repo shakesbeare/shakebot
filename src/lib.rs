@@ -2,8 +2,8 @@ use std::{collections::HashMap, sync::Mutex};
 
 pub mod bot;
 pub mod response;
+pub mod parsing;
 pub mod serde_response;
-pub mod smite;
 pub mod tests;
 
 use rand::seq::IteratorRandom;
@@ -17,7 +17,6 @@ const BOT_NAMES: [&str; 2] = ["ShakeBot", "ShakeBotDev"];
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
 pub struct Data {
     pub response_database: ResponseDatabase,
-    pub dota: dota::Dota,
     pub disabled_users: Vec<String>,
 }
 
@@ -28,10 +27,6 @@ impl Default for Data {
                 responses: vec![],
                 heroes: HashMap::new(),
                 icons: HashMap::new(),
-            },
-            dota: dota::Dota {
-                version: "0_00a".to_string(),
-                patch_notes: HashMap::new(),
             },
             disabled_users: vec![],
         }

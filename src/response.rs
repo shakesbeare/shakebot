@@ -1,6 +1,10 @@
-use crate::serde_response::PagesResponse;
+use crate::serde_response::*;
 use anyhow::Result;
+use futures::future::join_all;
 use futures::FutureExt as _;
+use reqwest_middleware::ClientBuilder;
+use reqwest_retry::policies::ExponentialBackoff;
+use reqwest_retry::RetryTransientMiddleware;
 use std::collections::HashMap;
 use std::sync::Mutex;
 use std::sync::OnceLock;
@@ -36,6 +40,7 @@ pub struct ResponseDatabase {
     pub icons: HashMap<String, String>,
 }
 
+#[derive(Debug, Clone, Copy)]
 pub enum Game {
     Dota,
     Smite,
@@ -87,7 +92,7 @@ impl ResponseDatabase {
                 // the smite voicelines page is actually a page full of a categories
                 // so, for each of these pages, we have to query again to get the correct
                 // pages
-                let url = reqwest::Url::parse_with_params(API_PATH, params.clone())?;
+                let url = reqwest::Url::parse_with_params(SMITE_API_PATH, params.clone())?;
                 tracing::info!("Acquiring voice line categories");
                 let json_response = reqwest::get(url).await?;
                 let pages_response = match json_response.json::<PagesResponse>().await {
@@ -201,7 +206,8 @@ impl ResponseDatabase {
         RESPONSE_ID.get_or_init(|| Mutex::new(0));
 
         tracing::info!("Populating hero responses");
-        let _ = self.populate_hero_responses().await;
+        let _ = self.populate_hero_responses(Game::Dota).await;
+        let _ = self.populate_hero_responses(Game::Smite).await;
         tracing::info!("Populating chat wheel responses");
         self.populate_chat_wheel().await;
         tracing::info!("Populating urls");
@@ -223,11 +229,14 @@ impl ResponseDatabase {
 
             let params = HashMap::from([("action", "raw")]);
             let url = match game {
-                Game::Dota => 
-                reqwest::Url::parse_with_params(&format!("{}/{}", DOTA_URL_BASE, page), params).unwrap(),
-,
-                Game::Smite => 
-                reqwest::Url::parse_with_params(&format!("{}/{}", SMITE_URL_BASE, page), params).unwrap(),
+                Game::Dota => {
+                    reqwest::Url::parse_with_params(&format!("{}/{}", DOTA_URL_BASE, page), params)
+                        .unwrap()
+                }
+                Game::Smite => {
+                    reqwest::Url::parse_with_params(&format!("{}/{}", SMITE_URL_BASE, page), params)
+                        .unwrap()
+                }
             };
             (reqwest::get(url).fuse(), hero_name)
         });
@@ -266,7 +275,8 @@ impl ResponseDatabase {
         let mut hero_names = vec![];
         for (responses_source, hero_name) in text_and_names {
             tracing::info!("Creating response list for {}", hero_name);
-            let response_link_list_fut = create_responses_text_and_link_list(responses_source);
+            let response_link_list_fut =
+                create_responses_text_and_link_list(responses_source, game);
             futures.push(response_link_list_fut);
             hero_names.push(hero_name);
         }
@@ -306,10 +316,11 @@ fn get_hero_name(page: &str) -> String {
 
 async fn create_responses_text_and_link_list(
     responses_source: String,
+    game: Game,
 ) -> Vec<(String, String, String)> {
     let mut responses: Vec<(String, String, String)> = vec![];
     let Ok(file_and_text_list) =
-        parse_all_response_lines(&mut responses_source.as_str())
+        crate::parsing::parse_all_response_lines(&mut responses_source.as_str())
     else {
         return responses;
     };
@@ -318,10 +329,10 @@ async fn create_responses_text_and_link_list(
         .iter()
         .map(|response| &response.file)
         .collect::<Vec<&String>>();
-    let file_and_link_map = links_for_files(&files_list).await;
+    let file_and_link_map = links_for_files(&files_list, game).await;
 
     for response in file_and_text_list.into_iter() {
-        let processed_text = process_text(&response.response);
+        let processed_text = crate::process_text(&response.response);
         if !processed_text.is_empty() {
             let link = file_and_link_map.get(&response.file);
             if let Some(v) = link {
@@ -335,7 +346,7 @@ async fn create_responses_text_and_link_list(
     responses
 }
 
-async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
+async fn links_for_files(files: &[&String], game: Game) -> HashMap<String, String> {
     fn get_params_for_files_api(files: Option<&[String]>) -> HashMap<String, String> {
         let titles = if files.is_some() {
             format!("File:{}", files.unwrap().join("|File:"))
@@ -357,11 +368,20 @@ async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
     let max_header_length = 1960;
 
     let mut files_link_mapping: HashMap<String, String> = HashMap::new();
-    let empty_api_length =
-        reqwest::Url::parse_with_params(API_PATH, get_params_for_files_api(None))
-            .unwrap()
-            .to_string()
-            .len();
+    let empty_api_length = match game {
+        Game::Dota => {
+            reqwest::Url::parse_with_params(DOTA_API_PATH, get_params_for_files_api(None))
+                .unwrap()
+                .to_string()
+                .len()
+        }
+        Game::Smite => {
+            reqwest::Url::parse_with_params(SMITE_API_PATH, get_params_for_files_api(None))
+                .unwrap()
+                .to_string()
+                .len()
+        }
+    };
 
     let mut futures = vec![];
     let mut files_batch_list = vec![];
@@ -376,11 +396,18 @@ async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
         if file_name_len + current_title_length >= max_header_length - empty_api_length
             || files_batch_list.len() >= max_title_list_length
         {
-            let url = reqwest::Url::parse_with_params(
-                API_PATH,
-                get_params_for_files_api(Some(&files_batch_list)),
-            )
-            .unwrap();
+            let url = match game {
+                Game::Dota => reqwest::Url::parse_with_params(
+                    DOTA_API_PATH,
+                    get_params_for_files_api(Some(&files_batch_list)),
+                )
+                .unwrap(),
+                Game::Smite => reqwest::Url::parse_with_params(
+                    SMITE_API_PATH,
+                    get_params_for_files_api(Some(&files_batch_list)),
+                )
+                .unwrap(),
+            };
             futures.push(client.get(url).send());
 
             files_batch_list.clear();
@@ -392,11 +419,18 @@ async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
     }
 
     if !files_batch_list.is_empty() {
-        let url = reqwest::Url::parse_with_params(
-            API_PATH,
-            get_params_for_files_api(Some(&files_batch_list)),
-        )
-        .unwrap();
+        let url = match game {
+            Game::Dota => reqwest::Url::parse_with_params(
+                DOTA_API_PATH,
+                get_params_for_files_api(Some(&files_batch_list)),
+            )
+            .unwrap(),
+            Game::Smite => reqwest::Url::parse_with_params(
+                SMITE_API_PATH,
+                get_params_for_files_api(Some(&files_batch_list)),
+            )
+            .unwrap(),
+        };
         futures.push(client.get(url).send());
     }
 
@@ -411,10 +445,8 @@ async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
                         let title = page.title.clone();
                         let image_info = &page.imageinfo;
                         let url = image_info[0].url.clone();
-                        let url =
-                            format!("{}{}", url.split_once(".ogg").unwrap().0, ".ogg");
-                        files_link_mapping
-                            .insert(title.chars().skip(5).collect::<String>(), url);
+                        // let url = format!("{}{}", url.split_once(".ogg").unwrap().0, ".ogg");
+                        files_link_mapping.insert(title.chars().skip(5).collect::<String>(), url);
                     }
                 }
                 Err(e) => {
@@ -429,4 +461,3 @@ async fn links_for_files(files: &[&String]) -> HashMap<String, String> {
 
     files_link_mapping
 }
-

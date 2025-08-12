@@ -21,11 +21,11 @@ async fn main() -> Result<()> {
             std::fs::write("data.ron", ron_str)?;
             tracing::info!("Checking for updates");
             // defaults.dota.check_for_updates().await;
-            defaults.smite.check_for_updates().await;
+            defaults.update().await;
             defaults
         }
     };
-    tracing::debug!("{} total responses", data.dota.response_database.responses.len());
+    tracing::debug!("{} total responses", data.response_database.responses.len());
     let _ = DATA.set(Mutex::new(data));
 
     ctrlc::set_handler(move || match clean_up() {

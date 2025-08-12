@@ -149,7 +149,7 @@ pub fn parse_all_response_lines(input: &mut &str) -> ModalResult<Vec<Response>> 
     let mut responses = Vec::new();
     for mut line in input {
         // check if line starts with <sm2>
-        if line.starts_with("* <sm2>") {
+        if line.starts_with("* <sm2>") || line.starts_with("| <sm2>") {
             // if it does, parse the line
             let (file, response) = parse_response_line.parse_next(&mut line)?;
             responses.push(Response { file, response });
