@@ -1,10 +1,8 @@
 use crate::serde_response::*;
+use anyhow::Context as _;
 use anyhow::Result;
 use futures::future::join_all;
 use futures::FutureExt as _;
-use reqwest_middleware::ClientBuilder;
-use reqwest_retry::policies::ExponentialBackoff;
-use reqwest_retry::RetryTransientMiddleware;
 use std::collections::HashMap;
 use std::sync::Mutex;
 use std::sync::OnceLock;
@@ -14,8 +12,8 @@ use rand::seq::IteratorRandom as _;
 const DOTA_URL_BASE: &str = "http://dota2.gamepedia.com";
 const DOTA_API_PATH: &str = "http://dota2.gamepedia.com/api.php";
 
-const SMITE_URL_BASE: &str = "http://smite.fandom.com/";
-const SMITE_API_PATH: &str = "http://smite.fandom.com/api.php";
+const SMITE_URL_BASE: &str = "https://smite.fandom.com";
+const SMITE_API_PATH: &str = "https://smite.fandom.com/api.php";
 
 #[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct Response {
@@ -64,12 +62,16 @@ impl ResponseDatabase {
                     category_params
                 };
                 let url = reqwest::Url::parse_with_params(DOTA_API_PATH, params)?;
-                let json_response = reqwest::get(url).await?;
-                let pages_response = match json_response.json::<PagesResponse>().await {
-                    Ok(v) => v,
-                    Err(e) => return Err(e.into()),
-                };
-
+                let client = crate::Client::default();
+                let json_response = client
+                    .get(url)
+                    .send()
+                    .await
+                    .context(format!("In GET request for {game:?} categories"))?;
+                let pages_response = json_response
+                    .json::<PagesResponse>()
+                    .await
+                    .context(format!("In GET request for {game:?} categories"))?;
                 let mut pages = vec![];
 
                 for category_members in pages_response.query.categorymembers {
@@ -93,13 +95,19 @@ impl ResponseDatabase {
                 // so, for each of these pages, we have to query again to get the correct
                 // pages
                 let url = reqwest::Url::parse_with_params(SMITE_API_PATH, params.clone())?;
+                let client = crate::Client::default();
                 tracing::info!("Acquiring voice line categories");
-                let json_response = reqwest::get(url).await?;
+                let json_response = client
+                    .get(url)
+                    .send()
+                    .await
+                    .context("In GET request for {game:?} categories")?;
                 let pages_response = match json_response.json::<PagesResponse>().await {
                     Ok(v) => v,
                     Err(e) => return Err(e.into()),
                 };
                 let mut pages = vec![];
+                let mut futures = vec![];
 
                 for category_members in pages_response.query.categorymembers {
                     let mut params = params.clone();
@@ -112,15 +120,22 @@ impl ResponseDatabase {
                     tracing::info!("Acquiring categories in {}", &category_members.title);
                     params.insert("cmtitle", &category_members.title);
                     let url = reqwest::Url::parse_with_params(SMITE_API_PATH, params)?;
-                    let json_response = reqwest::get(url).await?;
-                    let pages_response = match json_response.json::<PagesResponse>().await {
-                        Ok(v) => v,
+                    let client = crate::Client::default();
+                    futures.push(client.get(url).send());
+                }
+
+                let results = join_all(futures).await;
+                for res in results.into_iter() {
+                    match res {
+                        Ok(json_response) => {
+                            let pages_response = json_response.json::<PagesResponse>().await?;
+                            for members_inner in pages_response.query.categorymembers {
+                                pages.push(members_inner.title);
+                            }
+                        },
                         Err(e) => return Err(e.into()),
                     };
 
-                    for members_inner in pages_response.query.categorymembers {
-                        pages.push(members_inner.title);
-                    }
                 }
 
                 Ok(pages)
@@ -206,8 +221,10 @@ impl ResponseDatabase {
         RESPONSE_ID.get_or_init(|| Mutex::new(0));
 
         tracing::info!("Populating hero responses");
-        let _ = self.populate_hero_responses(Game::Dota).await;
-        let _ = self.populate_hero_responses(Game::Smite).await;
+        let selfs = unsafe { &mut *(self as *mut Self)};
+        let dota_fut = self.populate_hero_responses(Game::Dota);
+        let smite_fut = selfs.populate_hero_responses(Game::Smite);
+        join_all([dota_fut, smite_fut]).await;
         tracing::info!("Populating chat wheel responses");
         self.populate_chat_wheel().await;
         tracing::info!("Populating urls");
@@ -215,7 +232,12 @@ impl ResponseDatabase {
     }
 
     async fn populate_hero_responses(&mut self, game: Game) -> Result<()> {
-        let pages = self.get_pages_for(game).await.unwrap();
+        let client = crate::Client::default();
+        let pages = self
+            .get_pages_for(game)
+            .await
+            .context("Failed to get pages")
+            .unwrap();
         // TODO: handle errors rather than simply throwing them away
 
         let get_fut_and_names = pages.iter().map(|page| {
@@ -234,11 +256,12 @@ impl ResponseDatabase {
                         .unwrap()
                 }
                 Game::Smite => {
-                    reqwest::Url::parse_with_params(&format!("{}/{}", SMITE_URL_BASE, page), params)
-                        .unwrap()
+                    let url = reqwest::Url::parse_with_params(&format!("{}/{}", SMITE_URL_BASE, page), params)
+                        .unwrap();
+                    url
                 }
             };
-            (reqwest::get(url).fuse(), hero_name)
+            (client.get(url).send().fuse(), hero_name)
         });
 
         let (get_fut, hero_names): (Vec<_>, Vec<_>) = get_fut_and_names.into_iter().unzip();
@@ -251,7 +274,10 @@ impl ResponseDatabase {
             .zip(hero_names.into_iter())
             .filter_map(|(r, name)| match r {
                 Ok(v) => Some((v, name)),
-                Err(_) => None, // TODO here
+                Err(e) => {
+                    tracing::error!("An Error was detected {}", e);
+                    None
+            }
             })
             .map(|(r, name)| (r.text().fuse(), name))
             .collect::<Vec<_>>();
@@ -267,16 +293,22 @@ impl ResponseDatabase {
             .zip(hero_names)
             .filter_map(|(r, name)| match r {
                 Ok(v) => Some((v, name)),
-                Err(_) => None, // TODO here
+                Err(e) => {
+                    tracing::error!("An error was detected {}", e);
+                    None
+            }
             })
             .collect::<Vec<_>>();
 
         let mut futures = vec![];
         let mut hero_names = vec![];
         for (responses_source, hero_name) in text_and_names {
+            if hero_name.starts_with("Zhong Kui") {
+                dbg!(&responses_source);
+            }
             tracing::info!("Creating response list for {}", hero_name);
             let response_link_list_fut =
-                create_responses_text_and_link_list(responses_source, game);
+                create_responses_text_and_link_list(hero_name.clone(), responses_source, game);
             futures.push(response_link_list_fut);
             hero_names.push(hero_name);
         }
@@ -284,6 +316,9 @@ impl ResponseDatabase {
         let responses = join_all(futures).await;
         for (response, hero_name) in responses.into_iter().zip(hero_names) {
             tracing::info!("Adding responses for {}", hero_name);
+            if hero_name.starts_with("Zhong Kui") {
+                dbg!(&response);
+            }
             self.add_hero_and_responses(hero_name, response);
         }
 
@@ -315,14 +350,17 @@ fn get_hero_name(page: &str) -> String {
 }
 
 async fn create_responses_text_and_link_list(
+    hero_name: String,
     responses_source: String,
     game: Game,
 ) -> Vec<(String, String, String)> {
     let mut responses: Vec<(String, String, String)> = vec![];
-    let Ok(file_and_text_list) =
-        crate::parsing::parse_all_response_lines(&mut responses_source.as_str())
-    else {
-        return responses;
+    let file_and_text_list = match crate::parsing::parse_all_response_lines(&mut responses_source.as_str()) {
+        Ok(v) => v,
+        Err(e) => {
+            tracing::error!("An Error Occurred While Parsing responses for {}:\n{}", hero_name, e);
+            return responses;
+        }
     };
 
     let files_list = file_and_text_list
@@ -386,10 +424,7 @@ async fn links_for_files(files: &[&String], game: Game) -> HashMap<String, Strin
     let mut futures = vec![];
     let mut files_batch_list = vec![];
     let mut current_title_length = 0;
-    let retry_policy = ExponentialBackoff::builder().build_with_max_retries(5);
-    let client = ClientBuilder::new(reqwest::Client::new())
-        .with(RetryTransientMiddleware::new_with_policy(retry_policy))
-        .build();
+    let client = crate::Client::default();
 
     for file in files {
         let file_name_len = file_title_prefix_length + file.len();

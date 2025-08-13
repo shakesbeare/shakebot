@@ -1,8 +1,8 @@
 use winnow::{
-    combinator::{alt, delimited},
-    error::StrContext,
+    combinator::{alt, delimited, seq},
+    error::{AddContext as _, ContextError, ErrMode, StrContext},
     prelude::*,
-    token::{take_until, take_while},
+    token::{literal, take, take_until, take_while},
 };
 
 use regex::Regex;
@@ -17,6 +17,24 @@ pub struct Response {
 enum SquareTag<'a> {
     Ignorable,
     ContainsResponse(&'a str),
+}
+
+#[derive(Debug, PartialEq, Clone)]
+enum ResponseKind {
+    Standard,
+    Vgs,
+}
+
+fn parse_vertical_bar<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
+    literal("|")
+        .context(StrContext::Label("vertical bar"))
+        .parse_next(input)
+}
+
+fn parse_new_line<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
+    literal("\n")
+        .context(StrContext::Label("newline"))
+        .parse_next(input)
 }
 
 fn parse_squirly_tag<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
@@ -102,9 +120,7 @@ pub fn parse_response(input: &mut &str) -> ModalResult<String> {
             let tag = parse_square_tag.parse_next(input)?;
             match tag {
                 SquareTag::Ignorable => (),
-                SquareTag::ContainsResponse(quote_fragment) => {
-                    response.push_str(quote_fragment)
-                }
+                SquareTag::ContainsResponse(quote_fragment) => response.push_str(quote_fragment),
             }
         } else if input.starts_with('[') {
             let tag = parse_single_square_tag.parse_next(input)?;
@@ -120,39 +136,126 @@ pub fn parse_response(input: &mut &str) -> ModalResult<String> {
     Ok(response)
 }
 
-fn parse_begin_line<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
-    take_until(0.., r"<")
+fn parse_begin_line<'a>(input: &mut &'a str) -> ModalResult<ResponseKind> {
+    if input.starts_with('*') {
+        take_until(0.., r"<")
+            .context(StrContext::Label("begin line"))
+            .parse_next(input)?;
+        Ok(ResponseKind::Standard)
+    } else {
+        seq!(
+            parse_vertical_bar,
+            take_until(0.., '|'),
+            parse_vertical_bar,
+            ignore_space
+        )
         .context(StrContext::Label("begin line"))
-        .parse_next(input)
+        .parse_next(input)?;
+        Ok(ResponseKind::Vgs)
+    }
 }
 
-pub fn parse_response_line(input: &mut &str) -> ModalResult<(String, String)> {
-    parse_begin_line.parse_next(input)?;
-    let file = parse_complete_angle_tag
-        .context(StrContext::Label("parse sm1 tag"))
-        .parse_next(input)?;
-    ignore_space.parse_next(input)?;
-    let response = parse_response(input)?;
+pub fn parse_response_line(input: &mut &str) -> ModalResult<Vec<(String, String)>> {
+    match parse_begin_line.parse_next(input)? {
+        ResponseKind::Standard => {
+            let file = parse_complete_angle_tag
+                .context(StrContext::Label("parse sm2 tag"))
+                .parse_next(input)?;
+            ignore_space.parse_next(input)?;
+            let response = parse_response(input)?;
 
-    // process filename
-    let mut file = file.replace('_', " ").chars().collect::<Vec<char>>();
-    file[0] = file[0].to_uppercase().next().unwrap();
-    let file = file.into_iter().collect::<String>();
-    Ok((file, response))
+            // process filename
+            let mut file = file.replace('_', " ").chars().collect::<Vec<char>>();
+            file[0] = file[0].to_uppercase().next().unwrap();
+            let file = file.into_iter().collect::<String>();
+            Ok(vec![(file, response)])
+        }
+        ResponseKind::Vgs => {
+            let mut has_alternate = false;
+            if input.contains("<br>") {
+                has_alternate = true;
+            }
+
+            if has_alternate {
+                let first_response = take_until(0.., '<')
+                    .context(StrContext::Label("response"))
+                    .context(StrContext::Label("Parse VGS response text"))
+                    .parse_next(input)?
+                    .to_string();
+
+                parse_angle_tag
+                    .context(StrContext::Label("expected <br>"))
+                    .parse_next(input)?;
+                ignore_space(input)?;
+
+                let second_response = take_until(0.., '|')
+                    .context(StrContext::Label("response"))
+                    .context(StrContext::Label("Parse VGS response text"))
+                    .parse_next(input)?
+                    .to_string();
+
+                parse_vertical_bar(input)?;
+                ignore_space(input)?;
+
+                let first_file = parse_complete_angle_tag
+                    .context(StrContext::Label("parse sm2 tag"))
+                    .parse_next(input)?;
+
+                parse_angle_tag
+                    .context(StrContext::Label("expected <br>"))
+                    .parse_next(input)?;
+
+                let second_file = parse_complete_angle_tag
+                    .context(StrContext::Label("parse sm2 tag"))
+                    .parse_next(input)?;
+
+                Ok(vec![
+                    (first_file.to_string(), first_response),
+                    (second_file.to_string(), second_response),
+                ])
+            } else {
+                let response = take_until(0.., '|')
+                    .context(StrContext::Label("response"))
+                    .context(StrContext::Label("Parse VGS response text"))
+                    .parse_next(input)?
+                    .to_string();
+                parse_vertical_bar(input)?;
+                ignore_space(input)?;
+
+                let file = parse_complete_angle_tag
+                    .context(StrContext::Label("parse sm2 tag"))
+                    .parse_next(input)?;
+
+                Ok(vec![(file.to_string(), response)])
+            }
+        }
+    }
 }
 
 pub fn parse_all_response_lines(input: &mut &str) -> ModalResult<Vec<Response>> {
     // turn input into a vec of lines
     // let input = input.lines().collect::<Vec<&str>>();
-    let re = Regex::new(r"\n|\\n").unwrap();
-    let input = re.split(input);
+    let re = Regex::new(r"\n|\\n|\r|\\r").unwrap();
+    let mut input = re.split(input);
     let mut responses = Vec::new();
-    for mut line in input {
+    while let Some(mut line) = input.next() {
         // check if line starts with <sm2>
-        if line.starts_with("* <sm2>") || line.starts_with("| <sm2>") {
+        if line.starts_with("* <sm2>") {
             // if it does, parse the line
-            let (file, response) = parse_response_line.parse_next(&mut line)?;
-            responses.push(Response { file, response });
+            let parsed = parse_response_line.parse_next(&mut line)?;
+            for (file, response) in parsed {
+                responses.push(Response { file, response });
+            }
+        } else if line.starts_with("| align=\"left\" | \"") {
+            // these lines contain information over two lines
+            let cur_line = line;
+            let next_line = input.next().unwrap();
+            let mut merged = cur_line.to_string();
+            merged.push_str(next_line);
+            let parsed = parse_response_line.parse_next(&mut merged.as_str())?;
+            for (file, response) in parsed {
+                responses.push(Response { file, response });
+            }
         }
     }
 

@@ -1,18 +1,59 @@
 use std::{collections::HashMap, sync::Mutex};
 
 pub mod bot;
-pub mod response;
 pub mod parsing;
+pub mod response;
 pub mod serde_response;
 pub mod tests;
 
 use rand::seq::IteratorRandom;
+use reqwest::{header::{HeaderMap, HeaderValue, USER_AGENT}, IntoUrl, Method};
+use reqwest_middleware::{ClientBuilder, RequestBuilder};
+use reqwest_retry::{policies::ExponentialBackoff, RetryTransientMiddleware};
+use std::time::Duration;
 
 use crate::response::{Response, ResponseDatabase};
 
 pub static DATA: std::sync::OnceLock<Mutex<Data>> = std::sync::OnceLock::new();
 
 const BOT_NAMES: [&str; 2] = ["ShakeBot", "ShakeBotDev"];
+
+#[derive(Debug, Clone)]
+pub struct Client {
+    client: reqwest_middleware::ClientWithMiddleware,
+}
+
+impl Default for Client {
+    fn default() -> Self {
+        let mut headers = HeaderMap::new();
+        headers.insert(USER_AGENT, HeaderValue::from_static(
+                "Mozilla/5.0 (compatible; WebScraper/1.0)"
+        ));
+        let retry_policy = ExponentialBackoff::builder().build_with_max_retries(5);
+        return Self {
+            client: ClientBuilder::new(
+                reqwest::Client::builder()
+                    .pool_max_idle_per_host(10)
+                    .pool_idle_timeout(Duration::from_secs(30))
+                    .timeout(Duration::from_secs(20))
+                    .connect_timeout(Duration::from_secs(5))
+                    .tcp_keepalive(Duration::from_secs(60))
+                    .default_headers(headers)
+                    .build()
+                    .unwrap(),
+            )
+            .with(RetryTransientMiddleware::new_with_policy(retry_policy))
+            .build(),
+        };
+    }
+}
+
+impl Client {
+    /// See [`Client::get`]
+    pub fn get<U: IntoUrl>(&self, url: U) -> RequestBuilder {
+        self.client.request(Method::GET, url)
+    }
+}
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
 pub struct Data {
@@ -41,6 +82,7 @@ impl Data {
         tracing::info!("Populating responses");
         self.response_database.populate_responses().await;
     }
+
     pub fn get_response(&self, processed_text: &str, hero_id: Option<i32>) -> Option<&Response> {
         match hero_id {
             Some(id) => self
